@@ -1,0 +1,64 @@
+﻿    <Window x:Class="FileManager.windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="File Manager" Height="620" Width="904">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" MinHeight="247"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!--панель с элэментами управления-->
+        <StackPanel Orientation="Vertical" Grid.Row="0"  Margin="10,10,10,10">
+            <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                <TextBlock x:Name="StartDirectoryPlaceholder" IsHitTestVisible="True" Foreground="Gray" VerticalAlignment="Center" Margin="5,0" Visibility="Visible" RenderTransformOrigin="0.5,0.579"><Run Language="ru-ru" Text="Д"/><Run Text="иректория "/></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBox x:Name="StartDirectoryTextBox" Width="300" Margin="0,0,10,0" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <Button Content="Поиск дериктории" Width="150" Click="SynchronizeButton_Click" Height="25"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Vertical" Margin="0,0,0,20">
+                <TextBlock x:Name="RegexPlaceholder" IsHitTestVisible="False"  Foreground="Gray" VerticalAlignment="Center" Margin="5,0" Visibility="Visible"><Run Language="ru-ru" Text="Имя файла"/></TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBox x:Name="RegexTextBox" Width="300" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Поиск файла в указаной директории" Width="215" Margin="10,0,0,0" Click="SearchButton_Click"/>
+                <!--<Button Content="Остановить поиск" Width="132" Margin="10,0,0,0" Click="StopButton_Click"/>-->
+                <Button Content="Вепнуться к списку директорий" Width="186" Margin="10,0,0,0" Click="LoadDirectoryTree"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!--дерево результатов поиска-->
+        <TreeView x:Name="ResultsTreeView" Grid.Row="1" Margin="10,31,10,10">
+            <TreeView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить" Click="DeleteMenuItem_Click"/>
+                    <MenuItem Header="Редактировать" Click="EditMenuItem_Click"/>
+                </ContextMenu>
+            </TreeView.ContextMenu>
+        </TreeView>
+
+        <!--нижняя панель с информацией -->
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" Margin="0,12,0,0" Width="830">
+            <TextBlock Text="Директория: "/>
+            <TextBlock x:Name="CurrentDirectoryTextBlock"/>
+            <TextBlock Text=" | Найдено файлов: "/>
+            <TextBlock x:Name="FoundFilesTextBlock"/>
+            <!--<TextBlock Text=" | Всего файлов: "/>
+            <TextBlock x:Name="TotalFilesTextBlock"/>-->
+            <TextBlock Text=" | Прошло времени: "/>
+            <TextBlock x:Name="ElapsedTimeTextBlock"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
